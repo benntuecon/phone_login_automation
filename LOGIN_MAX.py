@@ -41,7 +41,10 @@ def login(account, password, delay=0, test=True, driver_to_take_over=None):
     driver.implicitly_wait(delay)
     if driver.current_url=="https://max.maicoin.com/two_factors":
         phone_msg=input("手機驗證碼逾時，重新輸入\n")
+        phone_msg_testbox = driver.find_element_by_name("two_factor[otp]")
         phone_msg_testbox.send_keys(phone_msg)
+        commit_btm2 = driver.find_elements_by_name("commit")
+        commit_btm2[1].click()
         driver.implicitly_wait(delay)
     #確認公告
     if len(driver.find_elements_by_id("announcement"))!=0:
